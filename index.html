@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LeadHarvest Malaysia | Direct WhatsApp B2B Leads Extractor</title>
+    <meta name="description" content="Stop wasting 6 hours copy-pasting numbers from Google Maps. Extract verified Malaysian business contacts with direct WhatsApp click-to-chat links into Excel.">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; color: #0f172a; line-height: 1.5; padding-bottom: 75px; }
+        .container { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+
+        /* Header */
+        header { background: #ffffff; border-bottom: 1px solid #e2e8f0; padding: 14px 0; position: sticky; top: 0; z-index: 40; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
+        .nav-row { display: flex; justify-content: space-between; align-items: center; }
+        .logo-btn { font-size: 1.15rem; font-weight: 800; color: #0f172a; background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 0; }
+        .logo-btn span { color: #2563eb; }
+        .badge-my { background: #eff6ff; color: #1d4ed8; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; border: 1px solid #bfdbfe; }
+
+        /* Buttons */
+        .btn-primary { background: #2563eb; color: #ffffff; font-weight: 700; padding: 11px 18px; border-radius: 8px; text-decoration: none; border: none; cursor: pointer; font-size: 14px; transition: all 0.15s ease-in-out; display: inline-flex; align-items: center; justify-content: center; gap: 6px; width: 100%; text-align: center; box-shadow: 0 1px 2px rgba(37, 99, 235, 0.2); }
+        .btn-primary:hover { background: #1d4ed8; }
+        .btn-primary:active { transform: scale(0.98); }
+        @media(min-width: 640px) { .btn-primary { width: auto; } }
+
+        /* Hero */
+        .hero { padding: 44px 0 36px; text-align: center; background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%); border-bottom: 1px solid #e2e8f0; }
+        .pill-badge { display: inline-flex; align-items: center; gap: 6px; background: #eff6ff; color: #1d4ed8; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; border: 1px solid #bfdbfe; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
+        h1 { font-size: 1.95rem; font-weight: 900; line-height: 1.2; margin-bottom: 14px; color: #0f172a; letter-spacing: -0.5px; }
+        @media(min-width: 768px) { h1 { font-size: 2.85rem; } }
+        .hero-sub { font-size: 1rem; color: #475569; max-width: 680px; margin: 0 auto 24px; line-height: 1.6; }
+        .highlight { color: #1d4ed8; font-weight: 700; }
+
+        /* Pain Points Box */
+        .pain-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 22px; margin: 24px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+        .pain-title { font-size: 1.05rem; font-weight: 800; color: #b91c1c; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+        .pain-list { list-style: none; font-size: 13.5px; color: #334155; }
+        .pain-list li { margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; }
+        .pain-list li span.x { color: #dc2626; font-weight: 900; font-size: 15px; line-height: 1.2; }
+
+        /* Comparison Cards */
+        .comp-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 24px 0; }
+        @media(min-width: 640px) { .comp-grid { grid-template-columns: 1fr 1fr; } }
+        .comp-card { background: #ffffff; border-radius: 12px; padding: 20px; border: 1px solid #e2e8f0; font-size: 13px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+        .comp-bad { border-left: 4px solid #ef4444; background: #fef2f2; }
+        .comp-good { border-left: 4px solid #2563eb; background: #eff6ff; }
+
+        /* Interactive Console Card */
+        .card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 20px; margin-bottom: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.05); }
+        .form-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 14px; }
+        @media(min-width: 640px) { .form-grid { grid-template-columns: 1.3fr 1.3fr 1fr; } }
+        select { width: 100%; background: #ffffff; border: 1px solid #cbd5e1; color: #0f172a; padding: 11px 12px; border-radius: 8px; font-size: 13.5px; outline: none; font-weight: 500; }
+        select:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+
+        .table-wrap { overflow-x: auto; background: #ffffff; border-radius: 8px; border: 1px solid #e2e8f0; margin-top: 14px; -webkit-overflow-scrolling: touch; }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; min-width: 480px; }
+        th { background: #f8fafc; color: #475569; padding: 11px 14px; font-weight: 700; border-bottom: 1px solid #e2e8f0; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; }
+        td { padding: 12px 14px; border-bottom: 1px solid #f1f5f9; color: #1e293b; }
+        tr:hover td { background-color: #f8fafc; }
+        .wa-btn { background: #ecfdf5; color: #047857; padding: 5px 10px; border-radius: 6px; border: 1px solid #a7f3d0; font-size: 11.5px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; cursor: pointer; transition: 0.15s; }
+        .wa-btn:hover { background: #d1fae5; }
+
+        /* Pricing Cards */
+        .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 24px 0; }
+        @media(min-width: 640px) { .pricing-grid { grid-template-columns: 1fr 1fr; } }
+        .price-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+        .price-card.featured { border: 2px solid #2563eb; background: #ffffff; box-shadow: 0 10px 25px -5px rgba(37,99,235,0.1); }
+        .badge-hot { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: #2563eb; color: #ffffff; font-size: 10px; font-weight: 800; padding: 3px 12px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .price-val { font-size: 2.3rem; font-weight: 900; color: #0f172a; margin: 10px 0; }
+        .checklist { list-style: none; margin-bottom: 22px; font-size: 13.5px; color: #475569; }
+        .checklist li { margin-bottom: 9px; display: flex; align-items: center; gap: 8px; }
+        .checklist li span { color: #2563eb; font-weight: 900; }
+
+        /* Sticky Mobile Bottom CTA */
+        .sticky-mobile-cta { position: fixed; bottom: 0; left: 0; right: 0; background: #ffffff; border-top: 1px solid #e2e8f0; padding: 10px 16px; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 12px; box-shadow: 0 -4px 15px rgba(0,0,0,0.06); }
+        @media(min-width: 640px) { .sticky-mobile-cta { display: none; } }
+        .sticky-text { font-size: 12px; color: #0f172a; font-weight: 800; line-height: 1.2; }
+        .sticky-text span { color: #2563eb; font-size: 11px; font-weight: 600; display: block; }
+        .sticky-btn { background: #2563eb; color: #ffffff; font-weight: 800; padding: 10px 16px; border-radius: 8px; font-size: 13px; white-space: nowrap; border: none; cursor: pointer; }
+
+        /* Footer */
+        footer { background: #ffffff; border-top: 1px solid #e2e8f0; padding: 28px 0; font-size: 11.5px; color: #64748b; margin-top: 48px; }
+        .footer-row { display: flex; flex-direction: column; gap: 10px; text-align: center; }
+        @media(min-width: 640px) { .footer-row { flex-direction: row; justify-content: space-between; text-align: left; } }
+        .footer-links button { background: none; border: none; color: #64748b; cursor: pointer; font-size: 11.5px; margin: 0 8px; text-decoration: underline; }
+        .footer-links button:hover { color: #0f172a; }
+
+        /* Modals */
+        .modal-bg { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 16px; }
+        .modal { background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; max-width: 440px; width: 100%; padding: 24px; position: relative; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04); }
+        .close-btn { position: absolute; top: 14px; right: 16px; background: none; border: none; color: #64748b; font-size: 18px; cursor: pointer; }
+        .hidden { display: none !important; }
+
+        /* Toast */
+        #toast { position: fixed; bottom: 80px; right: 16px; background: #0f172a; color: #ffffff; font-weight: 700; font-size: 13px; padding: 11px 18px; border-radius: 8px; box-shadow: 0 10px 20px rgba(0,0,0,0.15); z-index: 120; transition: 0.25s ease-out; opacity: 0; transform: translateY(20px); pointer-events: none; border: 1px solid #334155; }
+        #toast.show { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-row">
+            <button id="logoHomeBtn" class="logo-btn">
+                ⚡ Lead<span>Harvest</span> <span class="badge-my">MY</span>
+            </button>
+            <button id="navGetLeadsBtn" class="btn-primary" style="padding: 6px 14px; font-size: 12px; width: auto;">Get Leads</button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <span class="pill-badge">⚡ The 10x Prospecting Machine for Sales Teams</span>
+            <h1>Stop Spending 6 Hours a Day Manually Copy-Pasting Numbers from Google Maps.</h1>
+            <p class="hero-sub">
+                Export 500+ verified Malaysian company names, phone numbers, and <span class="highlight">direct 1-click WhatsApp chat links</span> in 30 seconds. Start messaging 50 decision-makers an hour without saving contacts to your phone.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 8px;">
+                <button id="heroTryBtn" class="btn-primary" style="width: auto; padding: 12px 28px; font-size: 15px;">⚡ Try Live Search Free</button>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+
+        <!-- Agitating Pain Points Section -->
+        <div class="pain-box">
+            <div class="pain-title">
+                <span>⚠️ Why Traditional B2B Prospecting Is Killing Your Sales:</span>
+            </div>
+            <ul class="pain-list">
+                <li>
+                    <span class="x">✕</span>
+                    <div><strong>The Manual Copy-Paste Trap:</strong> You or your sales reps waste 4–6 exhausting hours every single day clicking Google Maps pins, copying phone numbers, and typing them into Excel one by one.</div>
+                </li>
+                <li>
+                    <span class="x">✕</span>
+                    <div><strong>The "Save Contact First" Headache:</strong> You have to manually save 100 random stranger names into your mobile phone contacts just to send one WhatsApp introduction.</div>
+                </li>
+                <li>
+                    <span class="x">✕</span>
+                    <div><strong>Scammy &amp; Outdated Telegram Lists:</strong> Buying stale, 3-year-old Excel sheets from anonymous sellers with 70% dead numbers, disconnected landlines, and angry wrong-person responses.</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- The LeadHarvest Solution / USP -->
+        <div style="margin: 32px 0 20px; text-align: center;">
+            <h2 style="font-size: 1.45rem; font-weight: 800;">The LeadHarvest Advantage</h2>
+            <p style="font-size: 13px; color: #94a3b8; margin-top: 4px;">How top Malaysian real estate negotiators, solar reps, and agencies scale their pipeline:</p>
+        </div>
+
+        <div class="comp-grid">
+            <div class="comp-card comp-bad">
+                <h3 style="color: #ef4444; font-size: 13px; font-weight: 800; margin-bottom: 6px;">❌ Without LeadHarvest</h3>
+                <p style="color: #94a3b8; line-height: 1.6;">
+                    • 50 leads took 4 hours of tedious clicking.<br>
+                    • Fingers tired from saving phone contacts.<br>
+                    • No way to filter active WhatsApp numbers.<br>
+                    • 0 leads pitched before lunch.
+                </p>
+            </div>
+            <div class="comp-card comp-good">
+                <h3 style="color: #1d4ed8; font-size: 13px; font-weight: 800; margin-bottom: 6px;">✓ With LeadHarvest (Our Core USP)</h3>
+                <p style="color: #e2e8f0; line-height: 1.6;">
+                    • <strong>500+ verified leads in 30 seconds.</strong><br>
+                    • <strong>Direct wa.me links:</strong> tap once, WhatsApp opens instantly.<br>
+                    • Clean Excel/CSV with reviews, ratings &amp; addresses.<br>
+                    • Pitch 50 business owners before your coffee gets cold.
+                </p>
+            </div>
+        </div>
+
+        <!-- Live Interactive Demo Section -->
+        <div class="card" id="demoSection" style="margin-top: 36px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; margin-bottom: 12px; gap: 8px;">
+                <h3 style="font-size: 1.15rem; font-weight: 800;">⚡ Test Live Extraction Engine</h3>
+                <span style="font-size: 11px; color: #1d4ed8; background: #eff6ff; padding: 2px 8px; border-radius: 4px; font-weight: 700;">Google Maps API Connected</span>
+            </div>
+
+            <div class="form-grid">
+                <div>
+                    <label style="font-size: 11px; color: #94a3b8; display: block; margin-bottom: 4px;">Select Target Niche</label>
+                    <select id="nicheSelect">
+                        <option value="dental">Dental &amp; Aesthetic Clinics</option>
+                        <option value="detailing">Car Detailing &amp; Tint Shops</option>
+                        <option value="interior">Interior Designers &amp; Renovators</option>
+                        <option value="solar">Solar Panel &amp; Energy Contractors</option>
+                        <option value="cafes">Boutique Cafes &amp; Restaurants</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="font-size: 11px; color: #94a3b8; display: block; margin-bottom: 4px;">Target Location</label>
+                    <select id="citySelect">
+                        <option value="pj">Petaling Jaya, Selangor</option>
+                        <option value="kl">Bangsar &amp; Mont Kiara, KL</option>
+                        <option value="subang">Subang Jaya &amp; Sunway</option>
+                        <option value="penang">George Town, Penang</option>
+                        <option value="jb">Johor Bahru, Johor</option>
+                    </select>
+                </div>
+                <div style="display: flex; align-items: flex-end;">
+                    <button id="searchBtn" class="btn-primary" style="padding: 11px 16px;">⚡ Run Live Scrape</button>
+                </div>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Business Name</th>
+                            <th>Direct WhatsApp Link</th>
+                            <th>Area</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="text-align: center; padding: 20px 12px 8px; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 8px; margin-top: 14px;">
+                <p style="font-size: 13px; color: #94a3b8; margin-bottom: 12px;">Showing 5 free preview records. <strong>+423 more verified records</strong> ready to download in this dataset.</p>
+                <button class="btn-primary unlock-btn" style="padding: 12px 24px;">📥 Unlock Full 428 Leads in Excel (RM49)</button>
+            </div>
+        </div>
+
+        <!-- Pricing Section with Strong Guarantee -->
+        <section id="pricingSection" style="margin-top: 40px;">
+            <div style="text-align: center; margin-bottom: 24px;">
+                <h2 style="font-size: 1.55rem; font-weight: 800;">Transparent Credit Packs</h2>
+                <p style="color: #94a3b8; font-size: 13px; margin-top: 4px;">Pay once. No hidden monthly renewals. Credits never expire.</p>
+            </div>
+
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <div>
+                        <span style="font-size: 11px; color: #94a3b8; font-weight: 800; text-transform: uppercase;">Solo Rep Starter</span>
+                        <h3 style="font-size: 1.25rem; font-weight: 800; margin-top: 4px;">1,000 Lead Credits</h3>
+                        <div class="price-val">RM 49</div>
+                        <ul class="checklist">
+                            <li><span>✓</span> <strong>1,000 Verified Business Records</strong></li>
+                            <li><span>✓</span> Direct WhatsApp Click-to-Chat Links (wa.me)</li>
+                            <li><span>✓</span> Clean Excel &amp; CSV Instant Download</li>
+                            <li><span>✓</span> Klang Valley, Penang &amp; JB Coverage</li>
+                            <li><span>✓</span> Instant Delivery to Your Email</li>
+                        </ul>
+                    </div>
+                    <button class="btn-primary unlock-btn" style="background: #f1f5f9; color: #0f172a; color: #fff; border: 1px solid #334155;">Buy Starter Pack (RM49)</button>
+                </div>
+
+                <div class="price-card featured">
+                    <span class="badge-hot">Best Value • Sales Agency</span>
+                    <div>
+                        <span style="font-size: 11px; color: #1d4ed8; font-weight: 800; text-transform: uppercase;">Team Growth Pack</span>
+                        <h3 style="font-size: 1.25rem; font-weight: 800; margin-top: 4px;">3,000 Lead Credits</h3>
+                        <div class="price-val">RM 119</div>
+                        <ul class="checklist">
+                            <li><span>✓</span> <strong>3,000 Verified Business Records</strong></li>
+                            <li><span>✓</span> Direct WhatsApp Click-to-Chat Links</li>
+                            <li><span>✓</span> Full Nationwide Malaysian Cities</li>
+                            <li><span>✓</span> Batch Multi-Niche Downloads</li>
+                            <li><span>✓</span> Priority Customer Support</li>
+                        </ul>
+                    </div>
+                    <button class="btn-primary unlock-btn">Buy Pro Pack (RM119)</button>
+                </div>
+            </div>
+
+            <!-- Closing Trust & Risk Reversal -->
+            <div style="text-align: center; margin-top: 20px; font-size: 12px; color: #94a3b8; display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;">
+                <span>🔒 Bank Negara Compliant FPX &amp; Stripe</span>
+                <span>⚡ Instant CSV Download</span>
+                <span>🇲🇾 100% Malaysian PDPA Compliant</span>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Sticky Mobile Bottom Bar -->
+    <div class="sticky-mobile-cta">
+        <div class="sticky-text">
+            Unlock 500+ B2B Leads
+            <span>Direct WhatsApp Links in Excel</span>
+        </div>
+        <button class="sticky-btn unlock-btn">Get Leads (RM49)</button>
+    </div>
+
+    <!-- PDPA Compliant Footer -->
+    <footer>
+        <div class="container footer-row">
+            <div>
+                <strong>LeadHarvest Malaysia</strong> — Automated B2B Prospecting &amp; Directory Tool
+            </div>
+            <div class="footer-links">
+                <button id="openOptOutBtn">Remove My Business (PDPA Opt-Out)</button>
+                <button id="openPrivacyBtn">Privacy Policy</button>
+                <button id="openTermsBtn">Terms of Use</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="modal-bg hidden">
+        <div class="modal">
+            <button class="close-btn" id="closeModal">✕</button>
+            <h3 style="font-size: 1.2rem; font-weight: 900; margin-bottom: 4px;">Unlock Full B2B Leads Dataset</h3>
+            <p style="font-size: 12px; color: #94a3b8; margin-bottom: 16px;">Export 500+ verified rows with direct WhatsApp links in CSV/Excel.</p>
+
+            <form id="payForm">
+                <div style="margin-bottom: 12px;">
+                    <label style="font-size: 11px; color: #94a3b8; display: block; margin-bottom: 4px;">Company / Agent Name</label>
+                    <input type="text" id="custNameInput" required placeholder="e.g. Apex Property Advisors" style="width: 100%; background: #ffffff; border: 1px solid #cbd5e1; color: #0f172a; color: #fff; padding: 10px; border-radius: 8px; font-size: 13px;">
+                </div>
+                <div style="margin-bottom: 16px;">
+                    <label style="font-size: 11px; color: #94a3b8; display: block; margin-bottom: 4px;">Work Email (CSV Sent Here)</label>
+                    <input type="email" id="custEmailInput" required placeholder="agent@agency.my" style="width: 100%; background: #ffffff; border: 1px solid #cbd5e1; color: #0f172a; color: #fff; padding: 10px; border-radius: 8px; font-size: 13px;">
+                </div>
+                <button type="submit" class="btn-primary" style="padding: 12px; font-size: 14px;">Simulate Payment &amp; Download CSV</button>
+            </form>
+            <p style="text-align: center; font-size: 10px; color: #64748b; margin-top: 10px;">Secured via FPX Banking &amp; Stripe Malaysia</p>
+        </div>
+    </div>
+
+    <!-- PDPA Opt-Out In-Page Modal -->
+    <div id="optOutModal" class="modal-bg hidden">
+        <div class="modal">
+            <button class="close-btn" id="closeOptOut">✕</button>
+            <h3 style="font-size: 1.2rem; font-weight: 900; margin-bottom: 8px;">Business Delisting Request (PDPA 2010)</h3>
+            <p style="font-size: 12px; color: #94a3b8; margin-bottom: 14px;">In strict compliance with the Malaysian Personal Data Protection Act 2010, enter your business phone number to permanently purge your public listing within 24 hours.</p>
+            <form id="optOutForm">
+                <div style="margin-bottom: 12px;">
+                    <label style="font-size: 11px; color: #94a3b8; display: block; margin-bottom: 4px;">Business / Company Name</label>
+                    <input type="text" required placeholder="e.g. Kedai Kopi ABC Sdn Bhd" style="width: 100%; background: #ffffff; border: 1px solid #cbd5e1; color: #0f172a; color: #fff; padding: 10px; border-radius: 8px; font-size: 13px;">
+                </div>
+                <div style="margin-bottom: 14px;">
+                    <label style="font-size: 11px; color: #94a3b8; display: block; margin-bottom: 4px;">Phone Number to Remove</label>
+                    <input type="tel" required placeholder="+6012-3456789" style="width: 100%; background: #ffffff; border: 1px solid #cbd5e1; color: #0f172a; color: #fff; padding: 10px; border-radius: 8px; font-size: 13px;">
+                </div>
+                <button type="submit" class="btn-primary" style="padding: 11px;">Submit Delisting Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Policy In-Page Modal -->
+    <div id="policyModal" class="modal-bg hidden">
+        <div class="modal">
+            <button class="close-btn" id="closePolicy">✕</button>
+            <h3 style="font-size: 1.2rem; font-weight: 900; margin-bottom: 8px;" id="policyTitle">Privacy Policy</h3>
+            <div id="policyBody" style="font-size: 12px; color: #475569; max-height: 280px; overflow-y: auto; line-height: 1.6; padding-right: 6px;"></div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast">Action completed successfully</div>
+
+    <script>
+        const leadsData = {
+            dental: [
+                { name: "Klinik Pergigian Utama PJ", phone: "+60123881920", address: "Damansara Utama, PJ", rating: "4.8 (142)" },
+                { name: "SmileCraft Dental & Aesthetic", phone: "+60162994811", address: "SS2/67, Petaling Jaya", rating: "4.9 (218)" },
+                { name: "Dentalpro Specialist Center", phone: "+60193118274", address: "Section 14, PJ", rating: "4.7 (95)" },
+                { name: "Pristine Dental Care PJ", phone: "+60122049182", address: "Jalan Universiti, PJ", rating: "4.6 (88)" },
+                { name: "Lumiere Aesthetic Dental Clinic", phone: "+60173829104", address: "Ara Damansara, PJ", rating: "5.0 (312)" }
+            ],
+            detailing: [
+                { name: "Autowerkz Ceramic Coating PJ", phone: "+60123991280", address: "Sunway Damansara, PJ", rating: "4.8 (174)" },
+                { name: "Glanz Car Detailing Studio", phone: "+60178829102", address: "Section 51A, PJ", rating: "4.9 (290)" },
+                { name: "HyperShine Auto Spa", phone: "+60163381928", address: "SS15, Subang / PJ", rating: "4.6 (83)" },
+                { name: "Detailer Garage Empire", phone: "+60112839182", address: "Damansara Perdana, PJ", rating: "4.7 (115)" },
+                { name: "Apex Shield PPF Specialist", phone: "+60192039481", address: "Kota Damansara, PJ", rating: "5.0 (340)" }
+            ],
+            interior: [
+                { name: "Terra Interior Design & Build", phone: "+60128839102", address: "Uptown Damansara, PJ", rating: "4.9 (88)" },
+                { name: "Luxe Concept Living Studio", phone: "+60162291824", address: "Kelana Jaya, PJ", rating: "4.7 (62)" },
+                { name: "Urban Space Renovation Works", phone: "+60173829109", address: "Section 13, PJ", rating: "4.5 (45)" },
+                { name: "Moda Habitat Architectural ID", phone: "+60193829102", address: "Bandar Utama, PJ", rating: "4.8 (130)" },
+                { name: "Haven Renovation & Cabinetry", phone: "+60122938174", address: "Taman Mayang, PJ", rating: "4.6 (52)" }
+            ],
+            solar: [
+                { name: "Solarix Renewable Systems", phone: "+60128839100", address: "Section 51, Petaling Jaya", rating: "4.8 (75)" },
+                { name: "EcoVolt Clean Energy Sdn Bhd", phone: "+60163829102", address: "Kota Damansara, PJ", rating: "4.9 (94)" },
+                { name: "SunPower Smart Energy Solutions", phone: "+60173391820", address: "Kelana Business Centre, PJ", rating: "4.7 (52)" },
+                { name: "VoltGreen Solar EPC Malaysia", phone: "+60192938102", address: "Damansara Perdana, PJ", rating: "4.6 (41)" },
+                { name: "Helios Residential Solar Eng", phone: "+60123829109", address: "Subang Hi-Tech, PJ", rating: "5.0 (110)" }
+            ],
+            cafes: [
+                { name: "The Roastery Yard Cafe", phone: "+60129938102", address: "SS2/75, Petaling Jaya", rating: "4.8 (450)" },
+                { name: "Flour & Butter Artisan Bakery", phone: "+60163391820", address: "Damansara Jaya, PJ", rating: "4.7 (320)" },
+                { name: "Kopi Craft Specialty Espresso", phone: "+60172839101", address: "Section 17, PJ", rating: "4.9 (280)" },
+                { name: "Matsu Matcha & Brew", phone: "+60113829182", address: "Taman Megah, PJ", rating: "4.6 (190)" },
+                { name: "Terra Verde Plant-Based Eatery", phone: "+60192839102", address: "Ara Damansara, PJ", rating: "4.8 (210)" }
+            ]
+        };
+
+        const toast = document.getElementById('toast');
+        function showToast(msg) {
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        function renderRows(niche) {
+            const list = leadsData[niche] || leadsData.dental;
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            list.forEach((l, i) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${i+1}</td>
+                    <td><strong>${l.name}</strong></td>
+                    <td><button class="wa-btn chat-sim-btn" data-phone="${l.phone}" data-name="${l.name}">💬 Chat wa.me</button></td>
+                    <td style="color:#94a3b8;">${l.address}</td>
+                    <td style="color:#f59e0b; font-weight:700;">★ ${l.rating}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.querySelectorAll('.chat-sim-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const phone = btn.getAttribute('data-phone');
+                    const name = btn.getAttribute('data-name');
+                    showToast(`Simulated WhatsApp chat with ${name} (${phone})`);
+                });
+            });
+        }
+        renderRows('dental');
+
+        // Search action
+        document.getElementById('searchBtn').addEventListener('click', () => {
+            const niche = document.getElementById('nicheSelect').value;
+            renderRows(niche);
+            showToast('Extracted 428 fresh verified records!');
+        });
+
+        // Navigation scroll
+        document.getElementById('logoHomeBtn').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        document.getElementById('navGetLeadsBtn').addEventListener('click', () => {
+            document.getElementById('pricingSection').scrollIntoView({ behavior: 'smooth' });
+        });
+        document.getElementById('heroTryBtn').addEventListener('click', () => {
+            document.getElementById('demoSection').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Checkout Modal logic
+        const checkoutModal = document.getElementById('checkoutModal');
+        document.querySelectorAll('.unlock-btn').forEach(b => {
+            b.addEventListener('click', () => checkoutModal.classList.remove('hidden'));
+        });
+        document.getElementById('closeModal').addEventListener('click', () => {
+            checkoutModal.classList.add('hidden');
+        });
+
+        document.getElementById('payForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            checkoutModal.classList.add('hidden');
+            const niche = document.getElementById('nicheSelect').value;
+            const list = leadsData[niche] || leadsData.dental;
+            
+            let csv = "Index,Business Name,Phone,WhatsApp Direct Link,Location,Rating\n";
+            list.forEach((l, i) => {
+                csv += `${i+1},"${l.name}","${l.phone}","https://wa.me/${l.phone.replace(/[^0-9]/g,'')}","${l.address}","${l.rating}"\n`;
+            });
+            for(let j = 6; j <= 25; j++) {
+                csv += `${j},"Verified Commercial Enterprise #${j} PJ","+6012${3000000+j*1111}","https://wa.me/6012${3000000+j*1111}","Klang Valley commercial hub","4.8"\n`;
+            }
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            a.setAttribute('download', `leadharvest_verified_${niche}_leads.csv`);
+            a.click();
+            showToast('Payment verified! Downloaded CSV file.');
+        });
+
+        // PDPA Opt Out Modal
+        const optOutModal = document.getElementById('optOutModal');
+        document.getElementById('openOptOutBtn').addEventListener('click', () => optOutModal.classList.remove('hidden'));
+        document.getElementById('closeOptOut').addEventListener('click', () => optOutModal.classList.add('hidden'));
+        document.getElementById('optOutForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            optOutModal.classList.add('hidden');
+            showToast('Delisting request submitted. Record will be purged.');
+        });
+
+        // Policy Modal
+        const policyModal = document.getElementById('policyModal');
+        const policyTitle = document.getElementById('policyTitle');
+        const policyBody = document.getElementById('policyBody');
+        document.getElementById('closePolicy').addEventListener('click', () => policyModal.classList.add('hidden'));
+
+        document.getElementById('openPrivacyBtn').addEventListener('click', () => {
+            policyTitle.textContent = 'Privacy Policy (PDPA 2010)';
+            policyBody.innerHTML = 'LeadHarvest complies strictly with the Personal Data Protection Act 2010 of Malaysia. We index publicly accessible commercial directory listings published openly by businesses for commercial contact. We do not store or process private consumer data, NRIC numbers, or non-commercial private records.';
+            policyModal.classList.remove('hidden');
+        });
+
+        document.getElementById('openTermsBtn').addEventListener('click', () => {
+            policyTitle.textContent = 'Terms of Use & B2B Guidelines';
+            policyBody.innerHTML = 'By using LeadHarvest, users agree to utilize extracted commercial contact data solely for legitimate B2B commercial inquiries. Users are strictly prohibited from conducting automated spam campaigns or violating MCMC communication regulations.';
+            policyModal.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
