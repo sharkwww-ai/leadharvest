@@ -7,94 +7,111 @@
     <meta name="description" content="Stop wasting 6 hours copy-pasting numbers from Google Maps. Extract verified Malaysian business contacts with direct WhatsApp click-to-chat links into Excel.">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; color: #0f172a; line-height: 1.5; padding-bottom: 75px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; color: #0f172a; line-height: 1.5; padding-bottom: 80px; }
         .container { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
 
-        /* Header */
-        header { background: #ffffff; border-bottom: 1px solid #e2e8f0; padding: 14px 0; position: sticky; top: 0; z-index: 40; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
+        /* Sticky Header */
+        header { background: #ffffff; border-bottom: 1px solid #cbd5e1; padding: 14px 0; position: sticky; top: 0; z-index: 40; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
         .nav-row { display: flex; justify-content: space-between; align-items: center; }
-        .logo-btn { font-size: 1.15rem; font-weight: 800; color: #0f172a; background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 0; }
+        .logo-btn { font-size: 1.2rem; font-weight: 900; color: #0f172a; background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 0; }
         .logo-btn span { color: #2563eb; }
-        .badge-my { background: #eff6ff; color: #1d4ed8; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; border: 1px solid #bfdbfe; }
+        .badge-my { background: #dbeafe; color: #1e40af; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px; border: 1px solid #93c5fd; }
 
         /* Buttons */
-        .btn-primary { background: #2563eb; color: #ffffff; font-weight: 700; padding: 11px 18px; border-radius: 8px; text-decoration: none; border: none; cursor: pointer; font-size: 14px; transition: all 0.15s ease-in-out; display: inline-flex; align-items: center; justify-content: center; gap: 6px; width: 100%; text-align: center; box-shadow: 0 1px 2px rgba(37, 99, 235, 0.2); }
+        .btn-primary { background: #2563eb; color: #ffffff !important; font-weight: 800; padding: 12px 20px; border-radius: 8px; text-decoration: none; border: none; cursor: pointer; font-size: 14px; transition: all 0.15s ease-in-out; display: inline-flex; align-items: center; justify-content: center; gap: 6px; width: 100%; text-align: center; box-shadow: 0 2px 4px rgba(37, 99, 235, 0.25); }
         .btn-primary:hover { background: #1d4ed8; }
         .btn-primary:active { transform: scale(0.98); }
+        .btn-primary:disabled { opacity: 0.65; cursor: wait; }
         @media(min-width: 640px) { .btn-primary { width: auto; } }
 
-        /* Hero */
-        .hero { padding: 44px 0 36px; text-align: center; background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%); border-bottom: 1px solid #e2e8f0; }
-        .pill-badge { display: inline-flex; align-items: center; gap: 6px; background: #eff6ff; color: #1d4ed8; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; border: 1px solid #bfdbfe; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .btn-secondary { background: #0f172a; color: #ffffff !important; font-weight: 800; padding: 12px 20px; border-radius: 8px; border: none; cursor: pointer; font-size: 14px; transition: all 0.15s; display: inline-flex; align-items: center; justify-content: center; width: 100%; text-align: center; }
+        .btn-secondary:hover { background: #1e293b; }
+
+        /* Hero Section */
+        .hero { padding: 44px 0 36px; text-align: center; background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%); border-bottom: 1px solid #cbd5e1; }
+        .pill-badge { display: inline-flex; align-items: center; gap: 6px; background: #dbeafe; color: #1e40af; font-size: 11px; font-weight: 800; padding: 5px 12px; border-radius: 20px; border: 1px solid #93c5fd; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
         h1 { font-size: 1.95rem; font-weight: 900; line-height: 1.2; margin-bottom: 14px; color: #0f172a; letter-spacing: -0.5px; }
         @media(min-width: 768px) { h1 { font-size: 2.85rem; } }
-        .hero-sub { font-size: 1rem; color: #475569; max-width: 680px; margin: 0 auto 24px; line-height: 1.6; }
-        .highlight { color: #1d4ed8; font-weight: 700; }
+        .hero-sub { font-size: 1.05rem; color: #334155; max-width: 680px; margin: 0 auto 24px; line-height: 1.6; font-weight: 500; }
+        .highlight { color: #1d4ed8; font-weight: 800; }
 
         /* Pain Points Box */
-        .pain-box { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 22px; margin: 24px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
-        .pain-title { font-size: 1.05rem; font-weight: 800; color: #b91c1c; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-        .pain-list { list-style: none; font-size: 13.5px; color: #334155; }
-        .pain-list li { margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; }
-        .pain-list li span.x { color: #dc2626; font-weight: 900; font-size: 15px; line-height: 1.2; }
+        .pain-box { background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 22px; margin: 24px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
+        .pain-title { font-size: 1.1rem; font-weight: 800; color: #b91c1c; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+        .pain-list { list-style: none; font-size: 14px; color: #1e293b; }
+        .pain-list li { margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+        .pain-list li span.x { color: #dc2626; font-weight: 900; font-size: 16px; line-height: 1.2; }
 
         /* Comparison Cards */
-        .comp-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 24px 0; }
+        .comp-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 24px 0; }
         @media(min-width: 640px) { .comp-grid { grid-template-columns: 1fr 1fr; } }
-        .comp-card { background: #ffffff; border-radius: 12px; padding: 20px; border: 1px solid #e2e8f0; font-size: 13px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
-        .comp-bad { border-left: 4px solid #ef4444; background: #fef2f2; }
-        .comp-good { border-left: 4px solid #2563eb; background: #eff6ff; }
+        .comp-card { border-radius: 12px; padding: 20px; font-size: 13.5px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
+        .comp-bad { border: 1px solid #fecaca; border-left: 5px solid #dc2626; background: #fef2f2; color: #1e293b; }
+        .comp-good { border: 1px solid #bfdbfe; border-left: 5px solid #2563eb; background: #eff6ff; color: #0f172a; }
 
         /* Interactive Console Card */
-        .card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 20px; margin-bottom: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.05); }
-        .form-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 14px; }
+        .card { background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 22px; margin-bottom: 24px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .form-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 16px; }
         @media(min-width: 640px) { .form-grid { grid-template-columns: 1.3fr 1.3fr 1fr; } }
-        select { width: 100%; background: #ffffff; border: 1px solid #cbd5e1; color: #0f172a; padding: 11px 12px; border-radius: 8px; font-size: 13.5px; outline: none; font-weight: 500; }
-        select:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+        label.field-label { font-size: 12px; font-weight: 700; color: #1e293b; display: block; margin-bottom: 6px; }
+        select, input[type="text"], input[type="email"], input[type="tel"] {
+            width: 100%;
+            background-color: #ffffff !important;
+            border: 1.5px solid #94a3b8 !important;
+            color: #0f172a !important;
+            padding: 11px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            outline: none;
+            -webkit-text-fill-color: #0f172a !important;
+        }
+        select:focus, input:focus { border-color: #2563eb !important; box-shadow: 0 0 0 3px rgba(37,99,235,0.18); }
+        input::placeholder { color: #64748b !important; -webkit-text-fill-color: #64748b !important; opacity: 1; }
 
-        .table-wrap { overflow-x: auto; background: #ffffff; border-radius: 8px; border: 1px solid #e2e8f0; margin-top: 14px; -webkit-overflow-scrolling: touch; }
-        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; min-width: 480px; }
-        th { background: #f8fafc; color: #475569; padding: 11px 14px; font-weight: 700; border-bottom: 1px solid #e2e8f0; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; }
-        td { padding: 12px 14px; border-bottom: 1px solid #f1f5f9; color: #1e293b; }
+        .table-wrap { overflow-x: auto; background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; margin-top: 14px; -webkit-overflow-scrolling: touch; }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13.5px; min-width: 500px; }
+        th { background: #f1f5f9; color: #0f172a; padding: 12px 14px; font-weight: 800; border-bottom: 1px solid #cbd5e1; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; }
+        td { padding: 12px 14px; border-bottom: 1px solid #e2e8f0; color: #0f172a; font-weight: 500; }
         tr:hover td { background-color: #f8fafc; }
-        .wa-btn { background: #ecfdf5; color: #047857; padding: 5px 10px; border-radius: 6px; border: 1px solid #a7f3d0; font-size: 11.5px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; cursor: pointer; transition: 0.15s; }
-        .wa-btn:hover { background: #d1fae5; }
+        .wa-btn { background: #dcfce7; color: #065f46 !important; padding: 6px 12px; border-radius: 6px; border: 1px solid #86efac; font-size: 12px; font-weight: 800; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; text-decoration: none; transition: 0.15s; }
+        .wa-btn:hover { background: #bbf7d0; }
 
         /* Pricing Cards */
-        .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 24px 0; }
+        .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin: 24px 0; }
         @media(min-width: 640px) { .pricing-grid { grid-template-columns: 1fr 1fr; } }
-        .price-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
-        .price-card.featured { border: 2px solid #2563eb; background: #ffffff; box-shadow: 0 10px 25px -5px rgba(37,99,235,0.1); }
-        .badge-hot { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: #2563eb; color: #ffffff; font-size: 10px; font-weight: 800; padding: 3px 12px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .price-val { font-size: 2.3rem; font-weight: 900; color: #0f172a; margin: 10px 0; }
-        .checklist { list-style: none; margin-bottom: 22px; font-size: 13.5px; color: #475569; }
-        .checklist li { margin-bottom: 9px; display: flex; align-items: center; gap: 8px; }
+        .price-card { background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; padding: 26px; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+        .price-card.featured { border: 2.5px solid #2563eb; background: #ffffff; box-shadow: 0 10px 25px -5px rgba(37,99,235,0.15); }
+        .badge-hot { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #2563eb; color: #ffffff; font-size: 10.5px; font-weight: 800; padding: 3px 12px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .price-val { font-size: 2.4rem; font-weight: 900; color: #0f172a; margin: 10px 0; }
+        .checklist { list-style: none; margin-bottom: 22px; font-size: 14px; color: #1e293b; }
+        .checklist li { margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
         .checklist li span { color: #2563eb; font-weight: 900; }
 
         /* Sticky Mobile Bottom CTA */
-        .sticky-mobile-cta { position: fixed; bottom: 0; left: 0; right: 0; background: #ffffff; border-top: 1px solid #e2e8f0; padding: 10px 16px; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 12px; box-shadow: 0 -4px 15px rgba(0,0,0,0.06); }
+        .sticky-mobile-cta { position: fixed; bottom: 0; left: 0; right: 0; background: #ffffff; border-top: 1px solid #cbd5e1; padding: 10px 16px; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 12px; box-shadow: 0 -4px 15px rgba(0,0,0,0.08); }
         @media(min-width: 640px) { .sticky-mobile-cta { display: none; } }
-        .sticky-text { font-size: 12px; color: #0f172a; font-weight: 800; line-height: 1.2; }
-        .sticky-text span { color: #2563eb; font-size: 11px; font-weight: 600; display: block; }
-        .sticky-btn { background: #2563eb; color: #ffffff; font-weight: 800; padding: 10px 16px; border-radius: 8px; font-size: 13px; white-space: nowrap; border: none; cursor: pointer; }
+        .sticky-text { font-size: 12.5px; color: #0f172a; font-weight: 800; line-height: 1.25; }
+        .sticky-text span { color: #1d4ed8; font-size: 11.5px; font-weight: 700; display: block; }
+        .sticky-btn { background: #2563eb; color: #ffffff !important; font-weight: 800; padding: 10px 16px; border-radius: 8px; font-size: 13px; white-space: nowrap; border: none; cursor: pointer; }
 
         /* Footer */
-        footer { background: #ffffff; border-top: 1px solid #e2e8f0; padding: 28px 0; font-size: 11.5px; color: #64748b; margin-top: 48px; }
+        footer { background: #ffffff; border-top: 1px solid #cbd5e1; padding: 28px 0; font-size: 12px; color: #334155; margin-top: 48px; }
         .footer-row { display: flex; flex-direction: column; gap: 10px; text-align: center; }
         @media(min-width: 640px) { .footer-row { flex-direction: row; justify-content: space-between; text-align: left; } }
-        .footer-links button { background: none; border: none; color: #64748b; cursor: pointer; font-size: 11.5px; margin: 0 8px; text-decoration: underline; }
-        .footer-links button:hover { color: #0f172a; }
+        .footer-links button { background: none; border: none; color: #1e293b; font-weight: 600; cursor: pointer; font-size: 12px; margin: 0 8px; text-decoration: underline; }
+        .footer-links button:hover { color: #2563eb; }
 
         /* Modals */
-        .modal-bg { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 16px; }
-        .modal { background: #ffffff; border: 1px solid #cbd5e1; border-radius: 14px; max-width: 440px; width: 100%; padding: 24px; position: relative; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04); }
-        .close-btn { position: absolute; top: 14px; right: 16px; background: none; border: none; color: #64748b; font-size: 18px; cursor: pointer; }
+        .modal-bg { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 16px; }
+        .modal { background: #ffffff; border: 1px solid #94a3b8; border-radius: 14px; max-width: 440px; width: 100%; padding: 24px; position: relative; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2); color: #0f172a; }
+        .close-btn { position: absolute; top: 14px; right: 16px; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; width: 30px; height: 30px; color: #0f172a; font-size: 16px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .hidden { display: none !important; }
 
         /* Toast */
-        #toast { position: fixed; bottom: 80px; right: 16px; background: #0f172a; color: #ffffff; font-weight: 700; font-size: 13px; padding: 11px 18px; border-radius: 8px; box-shadow: 0 10px 20px rgba(0,0,0,0.15); z-index: 120; transition: 0.25s ease-out; opacity: 0; transform: translateY(20px); pointer-events: none; border: 1px solid #334155; }
+        #toast { position: fixed; bottom: 80px; right: 16px; background: #0f172a; color: #ffffff !important; font-weight: 700; font-size: 13px; padding: 12px 18px; border-radius: 8px; box-shadow: 0 10px 20px rgba(0,0,0,0.25); z-index: 120; transition: 0.25s ease-out; opacity: 0; transform: translateY(20px); pointer-events: none; }
         #toast.show { opacity: 1; transform: translateY(0); }
-</style>
+    </style>
 </head>
 <body>
 
@@ -103,7 +120,7 @@
             <button id="logoHomeBtn" class="logo-btn">
                 ⚡ Lead<span>Harvest</span> <span class="badge-my">MY</span>
             </button>
-            <button id="navGetLeadsBtn" class="btn-primary" style="padding: 6px 14px; font-size: 12px; width: auto;">Get Leads</button>
+            <button id="navGetLeadsBtn" class="btn-primary" style="padding: 8px 16px; font-size: 12.5px; width: auto;">Get Leads</button>
         </div>
     </header>
 
@@ -115,7 +132,7 @@
                 Export 500+ verified Malaysian company names, phone numbers, and <span class="highlight">direct 1-click WhatsApp chat links</span> in 30 seconds. Start messaging 50 decision-makers an hour without saving contacts to your phone.
             </p>
             <div style="display: flex; justify-content: center; gap: 8px;">
-                <button id="heroTryBtn" class="btn-primary" style="width: auto; padding: 12px 28px; font-size: 15px;">⚡ Try Live Search Free</button>
+                <button id="heroTryBtn" class="btn-primary" style="width: auto; padding: 13px 28px; font-size: 15px;">⚡ Try Live Search Free</button>
             </div>
         </div>
     </section>
@@ -145,14 +162,14 @@
 
         <!-- The LeadHarvest Solution / USP -->
         <div style="margin: 32px 0 20px; text-align: center;">
-            <h2 style="font-size: 1.45rem; font-weight: 800;">The LeadHarvest Advantage</h2>
-            <p style="font-size: 13px; color: #94a3b8; margin-top: 4px;">How top Malaysian real estate negotiators, solar reps, and agencies scale their pipeline:</p>
+            <h2 style="font-size: 1.5rem; font-weight: 900; color: #0f172a;">The LeadHarvest Advantage</h2>
+            <p style="font-size: 14px; color: #334155; margin-top: 4px; font-weight: 500;">How top Malaysian real estate negotiators, solar reps, and agencies scale their pipeline:</p>
         </div>
 
         <div class="comp-grid">
             <div class="comp-card comp-bad">
-                <h3 style="color: #ef4444; font-size: 13px; font-weight: 800; margin-bottom: 6px;">❌ Without LeadHarvest</h3>
-                <p style="color: #94a3b8; line-height: 1.6;">
+                <h3 style="color: #b91c1c; font-size: 14px; font-weight: 800; margin-bottom: 8px;">❌ Without LeadHarvest</h3>
+                <p style="color: #1e293b; line-height: 1.65;">
                     • 50 leads took 4 hours of tedious clicking.<br>
                     • Fingers tired from saving phone contacts.<br>
                     • No way to filter active WhatsApp numbers.<br>
@@ -160,8 +177,8 @@
                 </p>
             </div>
             <div class="comp-card comp-good">
-                <h3 style="color: #1d4ed8; font-size: 13px; font-weight: 800; margin-bottom: 6px;">✓ With LeadHarvest (Our Core USP)</h3>
-                <p style="color: #e2e8f0; line-height: 1.6;">
+                <h3 style="color: #1e40af; font-size: 14px; font-weight: 800; margin-bottom: 8px;">✓ With LeadHarvest (Our Core USP)</h3>
+                <p style="color: #0f172a; line-height: 1.65;">
                     • <strong>500+ verified leads in 30 seconds.</strong><br>
                     • <strong>Direct wa.me links:</strong> tap once, WhatsApp opens instantly.<br>
                     • Clean Excel/CSV with reviews, ratings &amp; addresses.<br>
@@ -172,14 +189,14 @@
 
         <!-- Live Interactive Demo Section -->
         <div class="card" id="demoSection" style="margin-top: 36px;">
-            <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; margin-bottom: 12px; gap: 8px;">
-                <h3 style="font-size: 1.15rem; font-weight: 800;">⚡ Test Live Extraction Engine</h3>
-                <span style="font-size: 11px; color: #1d4ed8; background: #eff6ff; padding: 2px 8px; border-radius: 4px; font-weight: 700;">Google Maps API Connected</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 14px; gap: 8px;">
+                <h3 style="font-size: 1.2rem; font-weight: 900; color: #0f172a;">⚡ Test Live Extraction Engine</h3>
+                <span style="font-size: 11.5px; color: #1e40af; background: #dbeafe; border: 1px solid #93c5fd; padding: 3px 10px; border-radius: 6px; font-weight: 800;">Google Maps API Connected</span>
             </div>
 
             <div class="form-grid">
                 <div>
-                    <label style="font-size: 11px; color: #94a3b8; display: block; margin-bottom: 4px;">Select Target Niche</label>
+                    <label class="field-label" for="nicheSelect">Select Target Niche</label>
                     <select id="nicheSelect">
                         <option value="dental">Dental &amp; Aesthetic Clinics</option>
                         <option value="detailing">Car Detailing &amp; Tint Shops</option>
@@ -189,7 +206,7 @@
                     </select>
                 </div>
                 <div>
-                    <label style="font-size: 11px; color: #94a3b8; display: block; margin-bottom: 4px;">Target Location</label>
+                    <label class="field-label" for="citySelect">Target Location</label>
                     <select id="citySelect">
                         <option value="pj">Petaling Jaya, Selangor</option>
                         <option value="kl">Bangsar &amp; Mont Kiara, KL</option>
@@ -199,7 +216,7 @@
                     </select>
                 </div>
                 <div style="display: flex; align-items: flex-end;">
-                    <button id="searchBtn" class="btn-primary" style="padding: 11px 16px;">⚡ Run Live Scrape</button>
+                    <button id="searchBtn" class="btn-primary" style="padding: 11px 16px; width: 100%;">⚡ Run Live Scrape</button>
                 </div>
             </div>
 
@@ -220,41 +237,41 @@
                 </table>
             </div>
 
-            <div style="text-align: center; padding: 20px 12px 8px; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 8px; margin-top: 14px;">
-                <p style="font-size: 13px; color: #94a3b8; margin-bottom: 12px;">Showing 5 free preview records. <strong>+423 more verified records</strong> ready to download in this dataset.</p>
-                <button class="btn-primary unlock-btn" style="padding: 12px 24px;">📥 Unlock Full 428 Leads in Excel (RM49)</button>
+            <div style="text-align: center; padding: 20px 14px 12px; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 10px; margin-top: 16px;">
+                <p style="font-size: 13.5px; color: #1e293b; margin-bottom: 12px; font-weight: 500;">Showing 5 free preview records. <strong>+423 more verified records</strong> ready to download in this dataset.</p>
+                <button class="btn-primary unlock-btn" data-tier="starter" data-title="Starter Pack (RM49 - 1,000 Credits)" style="padding: 12px 24px;">📥 Unlock Full 428 Leads in Excel (RM49)</button>
             </div>
         </div>
 
-        <!-- Pricing Section with Strong Guarantee -->
+        <!-- Pricing Section -->
         <section id="pricingSection" style="margin-top: 40px;">
             <div style="text-align: center; margin-bottom: 24px;">
-                <h2 style="font-size: 1.55rem; font-weight: 800;">Transparent Credit Packs</h2>
-                <p style="color: #94a3b8; font-size: 13px; margin-top: 4px;">Pay once. No hidden monthly renewals. Credits never expire.</p>
+                <h2 style="font-size: 1.6rem; font-weight: 900; color: #0f172a;">Transparent Credit Packs</h2>
+                <p style="color: #334155; font-size: 14px; margin-top: 4px; font-weight: 500;">Pay once. No hidden monthly renewals. Credits never expire.</p>
             </div>
 
             <div class="pricing-grid">
                 <div class="price-card">
                     <div>
-                        <span style="font-size: 11px; color: #94a3b8; font-weight: 800; text-transform: uppercase;">Solo Rep Starter</span>
-                        <h3 style="font-size: 1.25rem; font-weight: 800; margin-top: 4px;">1,000 Lead Credits</h3>
+                        <span style="font-size: 11.5px; color: #475569; font-weight: 800; text-transform: uppercase;">Solo Rep Starter</span>
+                        <h3 style="font-size: 1.3rem; font-weight: 900; margin-top: 4px; color: #0f172a;">1,000 Lead Credits</h3>
                         <div class="price-val">RM 49</div>
                         <ul class="checklist">
                             <li><span>✓</span> <strong>1,000 Verified Business Records</strong></li>
                             <li><span>✓</span> Direct WhatsApp Click-to-Chat Links (wa.me)</li>
                             <li><span>✓</span> Clean Excel &amp; CSV Instant Download</li>
                             <li><span>✓</span> Klang Valley, Penang &amp; JB Coverage</li>
-                            <li><span>✓</span> Instant Delivery to Your Email</li>
+                            <li><span>✓</span> Instant Delivery + Tax Invoice</li>
                         </ul>
                     </div>
-                    <button class="btn-primary unlock-btn" style="background: #f1f5f9; color: #0f172a; color: #fff; border: 1px solid #334155;">Buy Starter Pack (RM49)</button>
+                    <button class="btn-secondary unlock-btn" data-tier="starter" data-title="Starter Pack (RM49 - 1,000 Credits)">Buy Starter Pack (RM49)</button>
                 </div>
 
                 <div class="price-card featured">
                     <span class="badge-hot">Best Value • Sales Agency</span>
                     <div>
-                        <span style="font-size: 11px; color: #1d4ed8; font-weight: 800; text-transform: uppercase;">Team Growth Pack</span>
-                        <h3 style="font-size: 1.25rem; font-weight: 800; margin-top: 4px;">3,000 Lead Credits</h3>
+                        <span style="font-size: 11.5px; color: #1d4ed8; font-weight: 800; text-transform: uppercase;">Team Growth Pack</span>
+                        <h3 style="font-size: 1.3rem; font-weight: 900; margin-top: 4px; color: #0f172a;">3,000 Lead Credits</h3>
                         <div class="price-val">RM 119</div>
                         <ul class="checklist">
                             <li><span>✓</span> <strong>3,000 Verified Business Records</strong></li>
@@ -264,12 +281,12 @@
                             <li><span>✓</span> Priority Customer Support</li>
                         </ul>
                     </div>
-                    <button class="btn-primary unlock-btn" data-tier="pro" data-title="Pro Growth Pack (RM119)">Buy Pro Pack (RM119)</button>
+                    <button class="btn-primary unlock-btn" data-tier="pro" data-title="Pro Growth Pack (RM119 - 3,000 Credits)" style="width: 100%;">Buy Pro Pack (RM119)</button>
                 </div>
             </div>
 
             <!-- Closing Trust & Risk Reversal -->
-            <div style="text-align: center; margin-top: 20px; font-size: 12px; color: #94a3b8; display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;">
+            <div style="text-align: center; margin-top: 20px; font-size: 12.5px; color: #334155; font-weight: 600; display: flex; flex-wrap: wrap; justify-content: center; gap: 18px;">
                 <span>🔒 Bank Negara Compliant FPX &amp; Stripe</span>
                 <span>⚡ Instant CSV Download</span>
                 <span>🇲🇾 100% Malaysian PDPA Compliant</span>
@@ -284,14 +301,14 @@
             Unlock 500+ B2B Leads
             <span>Direct WhatsApp Links in Excel</span>
         </div>
-        <button class="sticky-btn unlock-btn">Get Leads (RM49)</button>
+        <button class="sticky-btn unlock-btn" data-tier="starter" data-title="Starter Pack (RM49 - 1,000 Credits)">Get Leads (RM49)</button>
     </div>
 
     <!-- PDPA Compliant Footer -->
     <footer>
         <div class="container footer-row">
             <div>
-                <strong>LeadHarvest Malaysia</strong> — Automated B2B Prospecting &amp; Directory Tool
+                <strong style="color: #0f172a;">LeadHarvest Malaysia</strong> — Automated B2B Prospecting &amp; Directory Tool
             </div>
             <div class="footer-links">
                 <button id="openOptOutBtn">Remove My Business (PDPA Opt-Out)</button>
@@ -301,44 +318,48 @@
         </div>
     </footer>
 
-    <!-- Checkout Modal -->
+    <!-- Real Stripe Checkout Modal -->
     <div id="checkoutModal" class="modal-bg hidden">
         <div class="modal">
-            <button class="close-btn" id="closeModal">✕</button>
-            <h3 style="font-size: 1.2rem; font-weight: 900; margin-bottom: 4px;">Unlock Full B2B Leads Dataset</h3>
-            <p style="font-size: 12px; color: #94a3b8; margin-bottom: 16px;">Export 500+ verified rows with direct WhatsApp links in CSV/Excel.</p>
+            <button type="button" class="close-btn" id="closeModal">✕</button>
+            <div style="display: inline-block; background: #dbeafe; color: #1e40af; font-size: 10.5px; font-weight: 800; padding: 3px 8px; border-radius: 4px; margin-bottom: 8px; text-transform: uppercase;">Official Stripe Checkout</div>
+            <h3 id="modalPlanHeading" style="font-size: 1.25rem; font-weight: 900; color: #0f172a; margin-bottom: 4px;">Starter Pack (RM49 - 1,000 Credits)</h3>
+            <p style="font-size: 13px; color: #334155; margin-bottom: 18px;">Export verified Malaysian business leads with direct WhatsApp links in CSV/Excel.</p>
 
-            <form id="payForm">
-                <div style="margin-bottom: 12px;">
-                    <label style="font-size: 11px; color: #94a3b8; display: block; margin-bottom: 4px;">Company / Agent Name</label>
-                    <input type="text" id="custNameInput" required placeholder="e.g. Apex Property Advisors" style="width: 100%; background: #ffffff; border: 1px solid #cbd5e1; color: #0f172a; color: #fff; padding: 10px; border-radius: 8px; font-size: 13px;">
+            <form id="stripeCheckoutForm" action="/api/create-checkout-session" method="POST">
+                <input type="hidden" name="planTier" id="selectedPlanTier" value="starter">
+                <div style="margin-bottom: 14px;">
+                    <label class="field-label" for="custNameInput">Company / Agent Name</label>
+                    <input type="text" name="customerName" id="custNameInput" required placeholder="e.g. Apex Property Advisors">
                 </div>
-                <div style="margin-bottom: 16px;">
-                    <label style="font-size: 11px; color: #94a3b8; display: block; margin-bottom: 4px;">Work Email (CSV Sent Here)</label>
-                    <input type="email" id="custEmailInput" required placeholder="agent@agency.my" style="width: 100%; background: #ffffff; border: 1px solid #cbd5e1; color: #0f172a; color: #fff; padding: 10px; border-radius: 8px; font-size: 13px;">
+                <div style="margin-bottom: 18px;">
+                    <label class="field-label" for="custEmailInput">Work Email (Invoice &amp; CSV Sent Here)</label>
+                    <input type="email" name="customerEmail" id="custEmailInput" required placeholder="agent@agency.my">
                 </div>
-                <button type="submit" class="btn-primary" style="padding: 12px; font-size: 14px;">Simulate Payment &amp; Download CSV</button>
+                <button type="submit" id="stripeSubmitBtn" class="btn-primary" style="width: 100%; padding: 13px; font-size: 14.5px;">
+                    🔒 Proceed to Secure Stripe Checkout
+                </button>
             </form>
-            <p style="text-align: center; font-size: 10px; color: #64748b; margin-top: 10px;">Secured via FPX Banking &amp; Stripe Malaysia</p>
+            <p style="text-align: center; font-size: 11px; color: #475569; margin-top: 12px; font-weight: 500;">Supports FPX Online Banking (Maybank2u, CIMB) &amp; Credit/Debit Cards</p>
         </div>
     </div>
 
     <!-- PDPA Opt-Out In-Page Modal -->
     <div id="optOutModal" class="modal-bg hidden">
         <div class="modal">
-            <button class="close-btn" id="closeOptOut">✕</button>
-            <h3 style="font-size: 1.2rem; font-weight: 900; margin-bottom: 8px;">Business Delisting Request (PDPA 2010)</h3>
-            <p style="font-size: 12px; color: #94a3b8; margin-bottom: 14px;">In strict compliance with the Malaysian Personal Data Protection Act 2010, enter your business phone number to permanently purge your public listing within 24 hours.</p>
+            <button type="button" class="close-btn" id="closeOptOut">✕</button>
+            <h3 style="font-size: 1.2rem; font-weight: 900; color: #0f172a; margin-bottom: 8px;">Business Delisting Request (PDPA 2010)</h3>
+            <p style="font-size: 13px; color: #334155; margin-bottom: 16px;">In strict compliance with the Malaysian Personal Data Protection Act 2010, enter your business phone number to permanently purge your public listing within 24 hours.</p>
             <form id="optOutForm">
                 <div style="margin-bottom: 12px;">
-                    <label style="font-size: 11px; color: #94a3b8; display: block; margin-bottom: 4px;">Business / Company Name</label>
-                    <input type="text" required placeholder="e.g. Kedai Kopi ABC Sdn Bhd" style="width: 100%; background: #ffffff; border: 1px solid #cbd5e1; color: #0f172a; color: #fff; padding: 10px; border-radius: 8px; font-size: 13px;">
+                    <label class="field-label">Business / Company Name</label>
+                    <input type="text" required placeholder="e.g. Kedai Kopi ABC Sdn Bhd">
                 </div>
-                <div style="margin-bottom: 14px;">
-                    <label style="font-size: 11px; color: #94a3b8; display: block; margin-bottom: 4px;">Phone Number to Remove</label>
-                    <input type="tel" required placeholder="+6012-3456789" style="width: 100%; background: #ffffff; border: 1px solid #cbd5e1; color: #0f172a; color: #fff; padding: 10px; border-radius: 8px; font-size: 13px;">
+                <div style="margin-bottom: 16px;">
+                    <label class="field-label">Phone Number to Remove</label>
+                    <input type="tel" required placeholder="+6012-3456789">
                 </div>
-                <button type="submit" class="btn-primary" style="padding: 11px;">Submit Delisting Request</button>
+                <button type="submit" class="btn-primary" style="width: 100%; padding: 12px;">Submit Delisting Request</button>
             </form>
         </div>
     </div>
@@ -346,9 +367,9 @@
     <!-- Policy In-Page Modal -->
     <div id="policyModal" class="modal-bg hidden">
         <div class="modal">
-            <button class="close-btn" id="closePolicy">✕</button>
-            <h3 style="font-size: 1.2rem; font-weight: 900; margin-bottom: 8px;" id="policyTitle">Privacy Policy</h3>
-            <div id="policyBody" style="font-size: 12px; color: #475569; max-height: 280px; overflow-y: auto; line-height: 1.6; padding-right: 6px;"></div>
+            <button type="button" class="close-btn" id="closePolicy">✕</button>
+            <h3 style="font-size: 1.2rem; font-weight: 900; color: #0f172a; margin-bottom: 8px;" id="policyTitle">Privacy Policy</h3>
+            <div id="policyBody" style="font-size: 13px; color: #1e293b; max-height: 280px; overflow-y: auto; line-height: 1.6; padding-right: 6px;"></div>
         </div>
     </div>
 
@@ -398,7 +419,7 @@
         function showToast(msg) {
             toast.textContent = msg;
             toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
+            setTimeout(() => toast.classList.remove('show'), 3500);
         }
 
         function renderRows(niche) {
@@ -406,30 +427,26 @@
             const tbody = document.getElementById('tableBody');
             tbody.innerHTML = '';
             list.forEach((l, i) => {
-                const tr = document.createElement('tr');
                 const cleanPhone = l.phone.replace(/[^0-9]/g, '');
+                const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td>${i+1}</td>
-                    <td><strong>${l.name}</strong></td>
+                    <td><strong style="color:#0f172a;">${l.name}</strong></td>
                     <td><a href="https://wa.me/${cleanPhone}" target="_blank" rel="noopener noreferrer" class="wa-btn">💬 Chat wa.me</a></td>
-                    <td style="color:#64748b;">${l.address}</td>
-                    <td style="color:#f59e0b; font-weight:700;">★ ${l.rating}</td>
+                    <td style="color:#334155;">${l.address}</td>
+                    <td style="color:#d97706; font-weight:800;">★ ${l.rating}</td>
                 `;
                 tbody.appendChild(tr);
             });
-
-// Real wa.me links open native WhatsApp app directly
         }
         renderRows('dental');
 
-        // Search action
         document.getElementById('searchBtn').addEventListener('click', () => {
             const niche = document.getElementById('nicheSelect').value;
             renderRows(niche);
             showToast('Extracted 428 fresh verified records!');
         });
 
-        // Navigation scroll
         document.getElementById('logoHomeBtn').addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
@@ -440,15 +457,35 @@
             document.getElementById('demoSection').scrollIntoView({ behavior: 'smooth' });
         });
 
-        // Checkout Modal logic
+        // Open Real Stripe Checkout Modal
         const checkoutModal = document.getElementById('checkoutModal');
         const selectedPlanTier = document.getElementById('selectedPlanTier');
+        const modalPlanHeading = document.getElementById('modalPlanHeading');
+        const stripeSubmitBtn = document.getElementById('stripeSubmitBtn');
+
         document.querySelectorAll('.unlock-btn').forEach(b => {
             b.addEventListener('click', () => {
                 const tier = b.getAttribute('data-tier') || 'starter';
-                if (selectedPlanTier) selectedPlanTier.value = tier;
+                const title = b.getAttribute('data-title') || 'Starter Pack (RM49 - 1,000 Credits)';
+                selectedPlanTier.value = tier;
+                modalPlanHeading.textContent = title;
+                stripeSubmitBtn.textContent = tier === 'pro'
+                    ? '🔒 Pay RM119 via Stripe / FPX'
+                    : '🔒 Pay RM49 via Stripe / FPX';
+                stripeSubmitBtn.disabled = false;
                 checkoutModal.classList.remove('hidden');
             });
+        });
+
+        document.getElementById('closeModal').addEventListener('click', () => {
+            checkoutModal.classList.add('hidden');
+        });
+
+        // Form submission -> Native POST to /api/create-checkout-session (Redirects to Stripe)
+        document.getElementById('stripeCheckoutForm').addEventListener('submit', () => {
+            stripeSubmitBtn.textContent = 'Redirecting to Stripe Checkout...';
+            stripeSubmitBtn.disabled = true;
+            // No e.preventDefault() here! Let the browser submit the POST form to /api/create-checkout-session
         });
 
         // Auto-download CSV if returning from Stripe ?success=true
@@ -468,36 +505,10 @@
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.setAttribute('href', url);
-                a.setAttribute('download', `leadharvest_verified_full_dataset.csv`);
+                a.setAttribute('download', 'leadharvest_verified_full_dataset.csv');
                 a.click();
             }, 600);
         }
-        document.getElementById('closeModal').addEventListener('click', () => {
-            checkoutModal.classList.add('hidden');
-        });
-
-        document.getElementById('payForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            checkoutModal.classList.add('hidden');
-            const niche = document.getElementById('nicheSelect').value;
-            const list = leadsData[niche] || leadsData.dental;
-            
-            let csv = "Index,Business Name,Phone,WhatsApp Direct Link,Location,Rating\n";
-            list.forEach((l, i) => {
-                csv += `${i+1},"${l.name}","${l.phone}","https://wa.me/${l.phone.replace(/[^0-9]/g,'')}","${l.address}","${l.rating}"\n`;
-            });
-            for(let j = 6; j <= 25; j++) {
-                csv += `${j},"Verified Commercial Enterprise #${j} PJ","+6012${3000000+j*1111}","https://wa.me/6012${3000000+j*1111}","Klang Valley commercial hub","4.8"\n`;
-            }
-
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.setAttribute('href', url);
-            a.setAttribute('download', `leadharvest_verified_${niche}_leads.csv`);
-            a.click();
-            showToast('Payment verified! Downloaded CSV file.');
-        });
 
         // PDPA Opt Out Modal
         const optOutModal = document.getElementById('optOutModal');
