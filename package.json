@@ -1,0 +1,8 @@
+{
+  "name": "leadharvest-malaysia",
+  "version": "1.0.0",
+  "description": "LeadHarvest Malaysia B2B Commercial Directory & Checkout",
+  "dependencies": {
+    "stripe": "^21.0.0"
+  }
+}
